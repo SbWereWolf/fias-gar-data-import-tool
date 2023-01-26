@@ -1,5 +1,5 @@
 {
-  "name": "sbwerewolf/fias-gar-schema-deploy-tool",
+  "name": "sbwerewolf/fias-gar-data-import-tool",
   "description": "Tool to import FIAS GAR database",
   "type": "tool",
   "license": "MIT",
