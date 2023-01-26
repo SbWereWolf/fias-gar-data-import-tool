@@ -130,7 +130,7 @@ class ImportCommand implements JsonSerializable
             $options->getRegionDataDirectoryPattern(),
             '',
         ];
-        $directoryPattern = implode(DIRECTORY_SEPARATOR, $parts);
+        $directoryPattern = join(DIRECTORY_SEPARATOR, $parts);
 
         $finder = new FileFinder($directoryPattern);
 
@@ -248,7 +248,7 @@ class ImportCommand implements JsonSerializable
 
         $formatted = number_format($rowsRead, 0, ',', ' ');
         $report =
-            "rows Read `{$formatted}`," .
+            "Rows read `{$formatted}`," .
             " success Operations `{$successOperations}`," .
             " success Inserts `{$successInserts}`," .
             " insert Affected `{$insertAffected}`," .

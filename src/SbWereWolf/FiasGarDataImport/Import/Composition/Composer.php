@@ -36,7 +36,7 @@ class Composer implements JsonSerializable
             }
         }
 
-        $wherePhrase = implode(' AND ', $wherePhraseParts);
+        $wherePhrase = join(' AND ', $wherePhraseParts);
         $select = "
 SELECT NULL FROM {$this->tableName} WHERE $wherePhrase";
 
@@ -69,8 +69,8 @@ SELECT NULL FROM {$this->tableName} WHERE $wherePhrase";
             $valueParts[] = $column->getParam();
         }
 
-        $columnPhrase = implode(',', $columnParts);
-        $valuePhrase = implode(',', $valueParts);
+        $columnPhrase = join(',', $columnParts);
+        $valuePhrase = join(',', $valueParts);
         $insert = "
 INSERT INTO {$this->tableName}($columnPhrase)VALUES($valuePhrase)";
 
@@ -89,8 +89,8 @@ INSERT INTO {$this->tableName}($columnPhrase)VALUES($valuePhrase)";
                 $setPhraseParts[] = $column->getColumnForUpdate();
             }
         }
-        $setPhrase = implode(',', $setPhraseParts);
-        $wherePhrase = implode(' AND ', $wherePhraseParts);
+        $setPhrase = join(',', $setPhraseParts);
+        $wherePhrase = join(' AND ', $wherePhraseParts);
         $update = "
 UPDATE {$this->tableName} SET $setPhrase WHERE $wherePhrase";
 
