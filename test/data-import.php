@@ -34,12 +34,12 @@ use SbWereWolf\FiasGarDataImport\Import\Processor\RoomTypes;
 use SbWereWolf\FiasGarDataImport\Import\Processor\Steads;
 use SbWereWolf\FiasGarDataImport\Import\Processor\SteadsParams;
 use SbWereWolf\Scripting\Config\EnvReader;
-use SbWereWolf\Scripting\Convert\DurationPrinter;
+use SbWereWolf\Scripting\Convert\NanosecondsConverter;
 use SbWereWolf\Scripting\FileSystem\Path;
 
 $startMoment = hrtime(true);
 
-$message = 'Script is starting';
+$message = 'FIAS data import script is starting';
 echo $message . PHP_EOL;
 
 $pathParts = [__DIR__, '..', 'vendor', 'autoload.php'];
@@ -69,7 +69,10 @@ $logger->pushProcessor(function ($record) {
 $logger->notice($message);
 
 $configPath = $pathComposer->make(['config.env']);
-(new EnvReader($configPath))->defineConstants();
+$env = new EnvReader($configPath);
+
+$logger->notice('Script run with params:' . json_encode($env));
+$env->defineConstants();
 
 $connection = (new PDO(
     constant('DSN'),
@@ -175,8 +178,8 @@ foreach (
         $finish = hrtime(true);
         $duration = $finish - $start;
 
-        $timeParts = new DurationPrinter();
-        $printout = $timeParts->printNanoseconds($duration);
+        $timeParts = new NanosecondsConverter();
+        $printout = $timeParts->print($duration);
         $formatted = number_format($rowsRead, 0, ',', ' ');
         $scriptAllocated = memory_get_usage(true) / 1024 / 1024;
 
@@ -200,8 +203,8 @@ if ($hasTransaction) {
     $finish = hrtime(true);
     $duration = $finish - $start;
 
-    $timeParts = new DurationPrinter();
-    $printout = $timeParts->printNanoseconds($duration);
+    $timeParts = new NanosecondsConverter();
+    $printout = $timeParts->print($duration);
     $formatted = number_format($rowsRead, 0, ',', ' ');
     $scriptAllocated = memory_get_usage(true) / 1024 / 1024;
 
@@ -228,8 +231,8 @@ $logger->notice($message);
 $finishMoment = hrtime(true);
 
 $totalTime = $finishMoment - $startMoment;
-$timeParts = new DurationPrinter();
-$printout = $timeParts->printNanoseconds($totalTime);
+$timeParts = new SbWereWolf\Scripting\Convert\NanosecondsConverter();
+$printout = $timeParts->print($totalTime);
 
 $message = "Import duration is $printout";
 $logger->notice($message);
