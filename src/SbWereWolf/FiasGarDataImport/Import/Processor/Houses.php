@@ -11,6 +11,7 @@ use SbWereWolf\FiasGarDataImport\Import\Composition\Column\AdditionalType2Column
 use SbWereWolf\FiasGarDataImport\Import\Composition\Column\ChangeIdDataColumn;
 use SbWereWolf\FiasGarDataImport\Import\Composition\Column\EndDateColumn;
 use SbWereWolf\FiasGarDataImport\Import\Composition\Column\HouseNumberColumn;
+use SbWereWolf\FiasGarDataImport\Import\Composition\Column\HouseTypeColumn;
 use SbWereWolf\FiasGarDataImport\Import\Composition\Column\IdColumn;
 use SbWereWolf\FiasGarDataImport\Import\Composition\Column\IsActiveColumn;
 use SbWereWolf\FiasGarDataImport\Import\Composition\Column\IsActualColumn;
@@ -35,6 +36,7 @@ class Houses extends Importer
     private string $houseNum = '';
     private string $addNum1 = '';
     private string $addNum2 = '';
+    private int $houseType = -1;
     private int $addType1 = -1;
     private int $addType2 = -1;
     private int $operTypeId = -1;
@@ -57,6 +59,7 @@ class Houses extends Importer
             HouseNumberColumn::class => &$this->houseNum,
             AdditionalNumber1Column::class => &$this->addNum1,
             AdditionalNumber2Column::class => &$this->addNum2,
+            HouseTypeColumn::class => &$this->houseType,
             AdditionalType1Column::class => &$this->addType1,
             AdditionalType2Column::class => &$this->addType2,
             OperationTypeIdColumn::class => &$this->operTypeId,
