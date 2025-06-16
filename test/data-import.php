@@ -112,6 +112,8 @@ $options = new ImportOptions(
     ],
     '{1,2,3,4,5,6,7,8,9,0}{1,2,3,4,5,6,7,8,9,0}',
     [
+        AddHouseTypes::class =>
+            'AS_ADDHOUSE_TYPES_20*.{x,X}{m,M}{l,L}',
         AddressObjects::class =>
             'AS_ADDR_OBJ_20*.{x,X}{m,M}{l,L}',
         AddressObjectDivision::class =>
